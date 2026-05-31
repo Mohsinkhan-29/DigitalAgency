@@ -1,5 +1,4 @@
-const dns = require("dns");
-dns.setDefaultResultOrder("ipv4first");
+
 
 const express = require("express");
 const cors = require("cors");
@@ -16,6 +15,8 @@ const app = express();
 
 
 app.set("trust proxy", 1); // fix rate limiter
+
+app.use(cors());    
 app.use(express.json());
 
 
@@ -24,7 +25,7 @@ app.use(
   cors({
     origin: (origin, callback) => {
       const allowed = [
-        "https://digitalagency-pmrq.onrender.com",
+        'http://localhost:5173',
         "https://digital-agency-dun.vercel.app",
       ];
       // allow requests with no origin (Postman, curl, etc.)
