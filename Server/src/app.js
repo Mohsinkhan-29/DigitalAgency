@@ -16,8 +16,8 @@ app.use(express.json());
 app.use(
   cors({
     origin: [
-      "https://digital-agency-dun.vercel.app/",
       "https://digitalagency-pmrq.onrender.com",
+      "https://digital-agency-dun.vercel.app",
     ],
     credentials: true,
   })
