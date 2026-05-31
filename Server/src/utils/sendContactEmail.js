@@ -16,7 +16,7 @@ const sendEmail = async ({ subject, html }) => {
   //     html,
   //   });
 
-  console.log("Email sent successfully");
+  console.log("contact form Email sent successfully");
 };
 
 module.exports = sendEmail;
