@@ -5,12 +5,11 @@ node_modules/
 build/
 dist/
 
-# environment variables
+# environment variables (ignore everywhere)
 .env
-.env.local
-.env.development
-.env.test
-.env.production
+.env.*
+**/.env
+**/.env.*
 
 # logs
 npm-debug.log*
