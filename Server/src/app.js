@@ -13,7 +13,15 @@ const app = express();
 
 app.use(express.json());
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "https://digital-agency-dun.vercel.app/",
+      "https://digitalagency-pmrq.onrender.com",
+    ],
+    credentials: true,
+  })
+);
 
 app.use(helmet());
 
