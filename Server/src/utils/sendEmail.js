@@ -1,46 +1,21 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-// Create transporter ONCE (important for performance)
-const transporter = nodemailer.createTransport({
-  service: "gmail",
-  auth: {
-    user: process.env.EMAIL_USER,
-    pass: process.env.EMAIL_PASS
-  }
-});
+const resend = new Resend(process.env.RESEND_API_KEY);
 
-
-// Optional: verify connection once at startup
-transporter.verify((error, success) => {
-  if (error) {
-    console.log("Mail server error:", error);
-  } else {
-    console.log("Mail server is ready to send messages");
-  }
-});
-
-const sendEmail = async ({ to, subject, html, text }) => {
+const sendEmail = async ({ to, subject, html }) => {
   try {
-    if (!to || !subject) {
-      throw new Error("Missing required email fields: to or subject");
-    }
-
-    const mailOptions = {
-      from: `DigitalAgency <${process.env.EMAIL_USER}>`,
+    const data = await resend.emails.send({
+      from: "DigitalAgency <mohsinkhan292003@gmail.com>",
       to,
       subject,
       html,
-      text, // fallback for non-HTML clients
-    };
+    });
 
-    const info = await transporter.sendMail(mailOptions);
-
-    console.log("Email sent:", info.messageId);
-
-    return info;
+    console.log("Email sent:", data.id);
+    return data;
   } catch (error) {
-    console.error("Email send failed:", error.message);
-    throw error; // important for API handling
+    console.error("Resend error:", error);
+    throw error;
   }
 };
 
