@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-const mongoSanitize = require("express-mongo-sanitize");
+
 
 const rateLimit = require("express-rate-limit");
 
@@ -14,7 +14,7 @@ const app = express();
 
 app.set("trust proxy", 1); // fix rate limiter
 app.use(express.json());
-app.use(mongoSanitize());
+
 // ... rest of your code
 
 app.use(express.json());
@@ -40,7 +40,7 @@ app.use(
 );
 
 // Handle preflight explicitly
-app.options("*", cors());
+app.options(/.*/, cors());
 
 app.use(helmet());
 const dns = require("dns");
