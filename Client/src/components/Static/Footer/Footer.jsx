@@ -10,7 +10,7 @@ const Footer = () => {
         if (!email) return;
         setLoading(true);
         try {
-            const res = await fetch("http://localhost:5000/api/subscribe", {
+            const res = await fetch("https://digitalagency-pmrq.onrender.com/api/subscribe", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
