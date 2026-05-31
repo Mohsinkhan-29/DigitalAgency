@@ -1,3 +1,6 @@
+const dns = require("dns");
+dns.setDefaultResultOrder("ipv4first");
+
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
@@ -15,9 +18,7 @@ const app = express();
 app.set("trust proxy", 1); // fix rate limiter
 app.use(express.json());
 
-// ... rest of your code
 
-app.use(express.json());
 
 app.use(
   cors({
@@ -43,8 +44,7 @@ app.use(
 app.options(/.*/, cors());
 
 app.use(helmet());
-const dns = require("dns");
-dns.setDefaultResultOrder("ipv4first");
+
 
 const newsletterRoutes = require("./routes/newsletterRoutes");
 
