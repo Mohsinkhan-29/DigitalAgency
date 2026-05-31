@@ -1,9 +1,14 @@
 const { Resend } = require("resend");
 
+// Initialize Resend once
 const resend = new Resend(process.env.RESEND_API_KEY);
 
+/**
+ * Send email using Resend
+ */
 const sendEmail = async ({ to, subject, name, email, message }) => {
   try {
+    // Professional email template
     const html = `
       <div style="font-family: Arial, sans-serif; background:#f6f6f6; padding:30px;">
         
@@ -36,21 +41,28 @@ const sendEmail = async ({ to, subject, name, email, message }) => {
           </p>
 
         </div>
-
       </div>
     `;
 
-    const data = await resend.emails.send({
+    // Send email
+    const response = await resend.emails.send({
       from: "DigitalAgency <onboarding@resend.dev>",
       to,
       subject,
       html,
     });
 
-    console.log("Email sent:", data.id);
-    return data;
+    // ✅ Correct logging (FIXED)
+    if (response.error) {
+      console.error("Resend error:", response.error);
+      throw new Error(response.error.message);
+    }
+
+    console.log("Email sent successfully:", response.data?.id);
+
+    return response;
   } catch (error) {
-    console.error("Resend error:", error);
+    console.error("Email send failed:", error);
     throw error;
   }
 };
