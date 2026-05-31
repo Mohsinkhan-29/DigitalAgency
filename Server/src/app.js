@@ -11,6 +11,12 @@ const errorHandler = require("./middleware/errorMiddleware");
 
 const app = express();
 
+
+app.set("trust proxy", 1); // fix rate limiter
+app.use(express.json());
+app.use(mongoSanitize());
+// ... rest of your code
+
 app.use(express.json());
 
 app.use(
