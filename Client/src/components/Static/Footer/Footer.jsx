@@ -9,25 +9,37 @@ const Footer = () => {
     const subscribe = async () => {
         if (!email) return;
         setLoading(true);
+
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
         try {
             const res = await fetch("https://digitalagency-pmrq.onrender.com/api/subscribe", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
+                headers: { "Content-Type": "application/json" },
+                signal: controller.signal,
                 body: JSON.stringify({ email }),
             });
 
             const data = await res.json();
+
+            if (!res.ok) {
+                throw new Error(data.message || "Subscription failed. Please try again.");
+            }
+
             setSubscribed(true);
             setEmail("");
         } catch (err) {
-            console.log(err);
+            if (err.name === "AbortError") {
+                console.error("Request timed out.");
+            } else {
+                console.error(err.message);
+            }
         } finally {
+            clearTimeout(timeout);
             setLoading(false);
         }
     };
-
     return (
         <footer className="bg-[#0B0F19] text-[#F8FAFC] pt-16 pb-8 px-6 md:px-12 lg:px-20 border-t border-[#1E293B]">
             <div className="max-w-7xl mx-auto">

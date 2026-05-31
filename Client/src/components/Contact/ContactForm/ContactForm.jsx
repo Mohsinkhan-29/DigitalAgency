@@ -133,14 +133,14 @@ export default function ContactPage() {
     e.preventDefault();
 
     const newErrors = {};
-    if (!validations.services)  newErrors.services  = "Select at least one service";
-    if (!validations.timeline)  newErrors.timeline  = "Select a timeline";
-    if (!validations.name)      newErrors.name      = "Enter valid full name";
-    if (!validations.email)     newErrors.email     = "Enter valid email address";
-    if (!validations.phone)     newErrors.phone     = "Enter valid phone number";
-    if (!validations.details)   newErrors.details   = "Project details must be at least 20 characters";
-    if (!validations.howFound)  newErrors.howFound  = "Please select an option";
-    if (!validations.agree)     newErrors.agree     = "You must accept terms";
+    if (!validations.services) newErrors.services = "Select at least one service";
+    if (!validations.timeline) newErrors.timeline = "Select a timeline";
+    if (!validations.name) newErrors.name = "Enter valid full name";
+    if (!validations.email) newErrors.email = "Enter valid email address";
+    if (!validations.phone) newErrors.phone = "Enter valid phone number";
+    if (!validations.details) newErrors.details = "Project details must be at least 20 characters";
+    if (!validations.howFound) newErrors.howFound = "Please select an option";
+    if (!validations.agree) newErrors.agree = "You must accept terms";
 
     setErrors(newErrors);
     if (Object.keys(newErrors).length > 0) return;
@@ -148,15 +148,19 @@ export default function ContactPage() {
     setSubmitLoading(true);
     setSubmitError("");
 
+    const controller = new AbortController();
+    const timeout = setTimeout(() => controller.abort(), 10000); // 10s timeout
+
     try {
       const res = await fetch("https://digitalagency-pmrq.onrender.com/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
+        signal: controller.signal,
         body: JSON.stringify({
-          name:     formData.name,
-          email:    formData.email,
-          company:  formData.company,
-          phone:    formData.phone,
+          name: formData.name,
+          email: formData.email,
+          company: formData.company,
+          phone: formData.phone,
           services: selected,
           timeline,
           budget,
@@ -173,8 +177,13 @@ export default function ContactPage() {
 
       setSubmitted(true);
     } catch (err) {
-      setSubmitError(err.message);
+      if (err.name === "AbortError") {
+        setSubmitError("Request timed out. Please try again in a moment.");
+      } else {
+        setSubmitError(err.message);
+      }
     } finally {
+      clearTimeout(timeout);
       setSubmitLoading(false);
     }
   };
@@ -347,10 +356,10 @@ export default function ContactPage() {
             {/* INPUTS */}
             <div className="grid md:grid-cols-2 gap-6 mt-10">
               {[
-                { label: "Full Name *",      field: "name",    type: "text",  placeholder: "Alex Johnson" },
-                { label: "Email Address *",  field: "email",   type: "email", placeholder: "alex@company.com" },
-                { label: "Company Name",     field: "company", type: "text",  placeholder: "Your Company Ltd." },
-                { label: "Phone Number",     field: "phone",   type: "tel",   placeholder: "+1 (555) 000-0000" },
+                { label: "Full Name *", field: "name", type: "text", placeholder: "Alex Johnson" },
+                { label: "Email Address *", field: "email", type: "email", placeholder: "alex@company.com" },
+                { label: "Company Name", field: "company", type: "text", placeholder: "Your Company Ltd." },
+                { label: "Phone Number", field: "phone", type: "tel", placeholder: "+1 (555) 000-0000" },
               ].map((input) => (
                 <div key={input.field}>
                   <label className="block text-xs font-bold uppercase mb-3" style={{ color: "#166534" }}>
