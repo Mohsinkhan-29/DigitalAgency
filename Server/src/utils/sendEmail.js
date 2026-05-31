@@ -46,7 +46,7 @@ const sendEmail = async ({ to, subject, name, email, message }) => {
 
     // Send email
     const response = await resend.emails.send({
-      from: "DigitalAgency <onboarding@resend.dev>",
+     from: "DigitalAgency <noreply@digital-agency-dun.vercel.app>",
       to,
       subject,
       html,
