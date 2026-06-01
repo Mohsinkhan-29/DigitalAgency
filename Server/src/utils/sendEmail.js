@@ -1,70 +1,50 @@
-const { Resend } = require("resend");
+const nodemailer = require("nodemailer");
 
-// Initialize Resend once
-const resend = new Resend(process.env.RESEND_API_KEY);
-
-/**
- * Send email using Resend
- */
-const sendEmail = async ({ to, subject, name, email, message }) => {
+const sendSubscriptionEmail = async ({ email }) => {
   try {
-    // Professional email template
+    const transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS, // Gmail App Password (NOT normal password)
+      },
+    });
+
+    await transporter.verify();
+
     const html = `
-      <div style="font-family: Arial, sans-serif; background:#f6f6f6; padding:30px;">
-        
-        <div style="max-width:600px; margin:auto; background:#ffffff; padding:25px; border-radius:10px; border:1px solid #eee;">
-          
-          <h2 style="color:#16a34a; margin-bottom:10px;">
-            📩 New Contact Form Submission
-          </h2>
+      <div style="font-family: Arial, sans-serif; padding: 10px;">
+        <h2>New Newsletter Subscription</h2>
 
-          <p style="color:#555; font-size:14px;">
-            You have received a new message from your website.
-          </p>
+        <p><strong>Email:</strong> ${email}</p>
 
-          <hr style="border:none; border-top:1px solid #eee; margin:20px 0;" />
-
-          <p><strong>Name:</strong> ${name || "N/A"}</p>
-          <p><strong>Email:</strong> ${email || "N/A"}</p>
-
-          <div style="margin-top:15px;">
-            <strong>Message:</strong>
-            <p style="background:#f9f9f9; padding:15px; border-radius:8px; color:#333; line-height:1.5;">
-              ${message || ""}
-            </p>
-          </div>
-
-          <hr style="border:none; border-top:1px solid #eee; margin:20px 0;" />
-
-          <p style="font-size:12px; color:#888;">
-            This email was sent from your DigitalAgency contact form.
-          </p>
-
-        </div>
+        <p style="margin-top: 20px; color: gray;">
+          Subscribed at: ${new Date().toLocaleString()}
+        </p>
       </div>
     `;
 
-    // Send email
-    const response = await resend.emails.send({
-     from: "DigitalAgency <noreply@digital-agency-dun.vercel.app>",
-      to,
-      subject,
+    const info = await transporter.sendMail({
+      from: `"Website Newsletter" <${process.env.EMAIL_USER}>`,
+      to: process.env.ADMIN_EMAIL,
+      subject: "New Newsletter Subscription",
       html,
     });
 
-    // ✅ Correct logging (FIXED)
-    if (response.error) {
-      console.error("Resend error:", response.error);
-      throw new Error(response.error.message);
-    }
+    console.log("Subscription email sent:", info.messageId);
 
-    console.log("Email sent successfully:", response.data?.id);
-
-    return response;
+    return {
+      success: true,
+      messageId: info.messageId,
+    };
   } catch (error) {
-    console.error("Email send failed:", error);
-    throw error;
+    console.error("Subscription Email Error:", error);
+
+    return {
+      success: false,
+      error: error.message,
+    };
   }
 };
 
-module.exports = sendEmail;
+module.exports = sendSubscriptionEmail;
