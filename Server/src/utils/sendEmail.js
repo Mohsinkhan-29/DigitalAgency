@@ -38,7 +38,9 @@ const sendEmail = async ({ name, email, message }) => {
       `,
     });
 
-    return true;
+    return
+    console.log("email sent");
+    true;
   } catch (error) {
     console.error("Resend Error:", error);
     throw error;
