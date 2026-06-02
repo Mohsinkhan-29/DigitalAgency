@@ -26,15 +26,23 @@ const buildAdminMessage = (email) => {
 };
 
 // ✅ FIXED: handles string OR object safely
-const sendEmail = async (payload) => {
+const sendEmail = async (email) => {
   try {
-    console.log("📨 Raw payload received:", payload);
+    if (!email || typeof email !== "string") {
+      throw new Error("sendEmail expects a string email only");
+    }
 
-    // ✅ Extract email safely
-    const email =
-      typeof payload === "string"
-        ? payload
-        : payload?.email;
+    return await resend.emails.send({
+      from: "Digital Agency <onboarding@resend.dev>",
+      to: "mohsinkhan292003@gmail.com",
+      subject: "🆕 New Newsletter Subscription",
+      html: buildAdminMessage(email),
+    });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
 
     // ❌ Validate email properly
     if (!email || typeof email !== "string") {
