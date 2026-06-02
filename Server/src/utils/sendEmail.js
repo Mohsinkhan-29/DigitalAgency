@@ -25,14 +25,23 @@ const buildAdminMessage = (email) => {
   `;
 };
 
-// ✅ FIX: accept plain email string (no destructuring issues)
-const sendEmail = async (email) => {
+// ✅ FIXED: handles string OR object safely
+const sendEmail = async (payload) => {
   try {
-    if (!email) {
-      throw new Error("Email is required but not provided");
+    console.log("📨 Raw payload received:", payload);
+
+    // ✅ Extract email safely
+    const email =
+      typeof payload === "string"
+        ? payload
+        : payload?.email;
+
+    // ❌ Validate email properly
+    if (!email || typeof email !== "string") {
+      throw new Error(`Invalid email passed: ${JSON.stringify(payload)}`);
     }
 
-    console.log("📨 Subscription email triggered:", email);
+    console.log("📨 Sending subscription email for:", email);
 
     const result = await resend.emails.send({
       from: "Digital Agency <onboarding@resend.dev>",
