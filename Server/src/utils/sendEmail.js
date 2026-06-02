@@ -1,53 +1,27 @@
 const { Resend } = require("resend");
 
-
 const resend = new Resend(process.env.RESEND_API_KEY);
-
-
 
 const sendEmail = async ({ name, email, message }) => {
   try {
-    // 1️⃣ Email to ADMIN
-    await resend.emails.send({
+    console.log("📨 sendEmail triggered");
+
+    const result = await resend.emails.send({
       from: "Digital Agency <onboarding@resend.dev>",
       to: process.env.ADMIN_EMAIL,
-      subject: "📩 New Contact Form Message",
-      html: `
-        <h2>New Message Received</h2>
-        <p><b>Name:</b> ${name}</p>
-        <p><b>Email:</b> ${email}</p>
-        <p><b>Message:</b> ${message}</p>
-      `,
+      subject: "Test Email",
+      html: `<p>${message}</p>`,
     });
 
-    // 2️⃣ Confirmation email to USER
-    await resend.emails.send({
-      from: "Digital Agency <onboarding@resend.dev>",
-      to: email,
-      subject: "✅ We received your message",
-      html: `
-        <div style="font-family: Arial, sans-serif; line-height: 1.6">
-          <h2>Hi ${name},</h2>
-          <p>Thanks for contacting us. We’ve received your message and will get back to you soon.</p>
+    console.log("✅ Resend response:", result);
 
-          <hr />
-
-          <h3>Your message:</h3>
-          <p>${message}</p>
-
-          <br />
-          <p>— Digital Agency Team</p>
-        </div>
-      `,
-    });
-
-    return
-    console.log("email sent");
-    true;
+    return result;
   } catch (error) {
-    console.error("Resend Error:", error);
+    console.error("❌ Resend FULL error:", error);
     throw error;
   }
 };
-console.log("SEND EMAIL FUNCTION CALLED");
+
+console.log("hitted email");
+
 module.exports = sendEmail;

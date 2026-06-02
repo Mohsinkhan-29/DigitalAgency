@@ -7,4 +7,6 @@ const {
 
 router.post("/subscribe", subscribeNewsletter);
 
+console.log("Email API hit");
+
 module.exports = router;
