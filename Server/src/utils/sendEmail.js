@@ -8,7 +8,7 @@ const sendEmail = async ({ name, email, message }) => {
 
     const result = await resend.emails.send({
       from: "Digital Agency <onboarding@resend.dev>",
-      to: process.env.ADMIN_EMAIL,
+      to: "mohsinkhan292003@gmail.com",
       subject: "Test Email",
       html: `<p>${message}</p>`,
     });
