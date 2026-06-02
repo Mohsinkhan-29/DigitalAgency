@@ -13,5 +13,6 @@ router.post(
   validateContact,
   submitContact
 );
+console.log("Contact API hit");
 
 module.exports = router;

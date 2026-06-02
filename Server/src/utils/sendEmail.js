@@ -1,6 +1,25 @@
 const { Resend } = require("resend");
 
+const { Resend } = require("resend");
+
 const resend = new Resend(process.env.RESEND_API_KEY);
+
+app.get("/test-email", async (req, res) => {
+  try {
+    const result = await resend.emails.send({
+      from: "Digital Agency <onboarding@resend.dev>",
+      to: process.env.ADMIN_EMAIL,
+      subject: "Test Email",
+      html: "<h1>Hello from Resend</h1>",
+    });
+
+    console.log(result);
+    res.json(result);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json(err);
+  }
+});
 
 const sendEmail = async ({ name, email, message }) => {
   try {
