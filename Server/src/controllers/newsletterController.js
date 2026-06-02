@@ -23,11 +23,16 @@ const subscribeNewsletter = async (req, res, next) => {
 
     const subscriber = await Subscriber.create({ email });
 
-    // send welcome email
+    // clean email template
     await sendEmail({
-      to: email,
-      subject: "Welcome to Digital Agency",
-      html: `<h2>Thanks for subscribing!</h2><p>You will get weekly updates.</p>`,
+      to: "mohsinkhan292003@gmail.com", // admin email
+      subject: "🆕 New Newsletter Subscription",
+      html: `
+        <div style="font-family:Arial;">
+          <h2>New Subscriber 🚀</h2>
+          <p><b>Email:</b> ${email}</p>
+        </div>
+      `,
     });
 
     res.json({
