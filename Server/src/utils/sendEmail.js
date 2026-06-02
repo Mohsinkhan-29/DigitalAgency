@@ -49,5 +49,5 @@ const sendEmail = async ({ name, email, message }) => {
     throw error;
   }
 };
-
+console.log("SEND EMAIL FUNCTION CALLED");
 module.exports = sendEmail;
