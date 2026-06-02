@@ -1,57 +1,26 @@
-const nodemailer = require("nodemailer");
+const { Resend } = require("resend");
 
-const sendSubscriptionEmail = async ({ email }) => {
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+const sendEmail = async ({ name, email, message }) => {
   try {
-    const nodemailer = require("nodemailer");
-
-    const transporter = nodemailer.createTransport({
-      host: "smtp.gmail.com",
-      port: 587,
-      secure: false, // STARTTLS
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS, // must be Gmail App Password
-      },
-      tls: {
-        rejectUnauthorized: false,
-      },
-    });
-
-    await transporter.verify();
-
-    const html = `
-      <div style="font-family: Arial, sans-serif; padding: 10px;">
-        <h2>New Newsletter Subscription</h2>
-
-        <p><strong>Email:</strong> ${email}</p>
-
-        <p style="margin-top: 20px; color: gray;">
-          Subscribed at: ${new Date().toLocaleString()}
-        </p>
-      </div>
-    `;
-
-    const info = await transporter.sendMail({
-      from: `"Website Newsletter" <${process.env.EMAIL_USER}>`,
+    const data = await resend.emails.send({
+      from: "Digital Agency <onboarding@resend.dev>",
       to: process.env.ADMIN_EMAIL,
-      subject: "New Newsletter Subscription",
-      html,
+      subject: "New Contact Form Message",
+      html: `
+        <h2>New Contact Form Submission</h2>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Message:</b> ${message}</p>
+      `,
     });
 
-    console.log("Subscription email sent:", info.messageId);
-
-    return {
-      success: true,
-      messageId: info.messageId,
-    };
+    return data;
   } catch (error) {
-    console.error("Subscription Email Error:", error);
-
-    return {
-      success: false,
-      error: error.message,
-    };
+    console.error("Resend Error:", error);
+    throw error;
   }
 };
 
-module.exports = sendSubscriptionEmail;
+module.exports = sendEmail;
