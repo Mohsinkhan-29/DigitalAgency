@@ -1,18 +1,30 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import { TbWorldCode } from "react-icons/tb";
+import { TfiStatsUp } from "react-icons/tfi";
+import { TbTargetArrow } from "react-icons/tb";
+import { MdStars } from "react-icons/md";
+import { FaRecycle } from "react-icons/fa6";
+
+import { FaTrophy } from "react-icons/fa";
+import { TbDatabaseShare } from "react-icons/tb";
+import { FaBoltLightning } from "react-icons/fa6";
+import { FaHandshakeSimple } from "react-icons/fa6";
+
+
 const stats = [
-  { icon: "🌐", title: "Web Projects", sub: "Delivered on time", val: "97%", num: 97, suffix: "%" },
-  { icon: "📈", title: "Traffic Growth", sub: "Avg. 6 months post-SEO", val: "+312%", num: 312, suffix: "%" },
-  { icon: "🎯", title: "Ad ROI", sub: "Across PPC campaigns", val: "7×", num: 7, suffix: "×" },
-  { icon: "⭐", title: "Clutch Rating", sub: "Based on 80+ reviews", val: "4.9/5", num: 4.9, suffix: "/5" },
-  { icon: "🔄", title: "Client Retention", sub: "Continue with retainer", val: "86%", num: 86, suffix: "%" },
+  { icon: <TbWorldCode className="text-green-500" />, title: "Web Projects", sub: "Delivered on time", val: "97%", num: 97, suffix: "%" },
+  { icon: <TfiStatsUp className="text-green-500" />, title: "Traffic Growth", sub: "Avg. 6 months post-SEO", val: "+312%", num: 312, suffix: "%" },
+  { icon: <TbTargetArrow className="text-green-500" />, title: "Ad ROI", sub: "Across PPC campaigns", val: "7×", num: 7, suffix: "×" },
+  { icon: <MdStars className="text-green-500" />, title: "Clutch Rating", sub: "Based on 80+ reviews", val: "4.9/5", num: 4.9, suffix: "/5" },
+  { icon: <FaRecycle className="text-green-500" />, title: "Client Retention", sub: "Continue with retainer", val: "86%", num: 86, suffix: "%" },
 ];
 
 const cards = [
-  { icon: "🏆", title: "Award Winning", text: "Recognised across Pakistan and South Asia for digital excellence." },
-  { icon: "📊", title: "Data Driven", text: "Every decision backed by analytics, A/B tests, and real numbers." },
-  { icon: "⚡", title: "Fast Delivery", text: "On-time delivery on 97% of projects. No surprises, no delays." },
-  { icon: "🤝", title: "Dedicated Team", text: "You get a dedicated account manager — not a revolving door of reps." },
+  { icon: <FaTrophy className="text-green-500" />, title: "Award Winning", text: "Recognised across Pakistan and South Asia for digital excellence." },
+  { icon: <TbDatabaseShare className="text-green-500" />, title: "Data Driven", text: "Every decision backed by analytics, A/B tests, and real numbers." },
+  { icon: <FaBoltLightning className="text-green-500" />, title: "Fast Delivery", text: "On-time delivery on 97% of projects. No surprises, no delays." },
+  { icon: <FaHandshakeSimple className="text-green-500" />, title: "Dedicated Team", text: "You get a dedicated account manager — not a revolving door of reps." },
 ];
 
 function useInView(threshold = 0.15) {
@@ -125,29 +137,26 @@ export default function HomeWhy() {
         }
 
         .why-tag {
-          animation: ${
-            sectionInView
-              ? "tagPop 0.7s cubic-bezier(.22,1,.36,1) forwards"
-              : "none"
-          };
+          animation: ${sectionInView
+          ? "tagPop 0.7s cubic-bezier(.22,1,.36,1) forwards"
+          : "none"
+        };
           opacity: 0;
         }
 
         .why-title {
-          animation: ${
-            sectionInView
-              ? "fadeUp 0.75s cubic-bezier(.22,1,.36,1) 0.15s forwards"
-              : "none"
-          };
+          animation: ${sectionInView
+          ? "fadeUp 0.75s cubic-bezier(.22,1,.36,1) 0.15s forwards"
+          : "none"
+        };
           opacity: 0;
         }
 
         .why-sub {
-          animation: ${
-            sectionInView
-              ? "fadeUp 0.75s cubic-bezier(.22,1,.36,1) 0.28s forwards"
-              : "none"
-          };
+          animation: ${sectionInView
+          ? "fadeUp 0.75s cubic-bezier(.22,1,.36,1) 0.28s forwards"
+          : "none"
+        };
           opacity: 0;
         }
 
@@ -155,20 +164,18 @@ export default function HomeWhy() {
         .wcard-1,
         .wcard-2,
         .wcard-3 {
-          animation: ${
-            sectionInView
-              ? "fadeUp 0.7s cubic-bezier(.22,1,.36,1) forwards"
-              : "none"
-          };
+          animation: ${sectionInView
+          ? "fadeUp 0.7s cubic-bezier(.22,1,.36,1) forwards"
+          : "none"
+        };
           opacity: 0;
         }
 
         .stats-panel {
-          animation: ${
-            statsInView
-              ? "fadeLeft 0.85s cubic-bezier(.22,1,.36,1) 0.2s forwards"
-              : "none"
-          };
+          animation: ${statsInView
+          ? "fadeLeft 0.85s cubic-bezier(.22,1,.36,1) 0.2s forwards"
+          : "none"
+        };
           opacity: 0;
         }
 
@@ -229,7 +236,7 @@ export default function HomeWhy() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
 
           {/* LEFT */}
-          <div>
+          <div data-aos="fade-right">
             <div
               className="why-tag inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full text-xs font-semibold tracking-widest uppercase"
               style={{
@@ -243,12 +250,15 @@ export default function HomeWhy() {
                 className="w-1.5 h-1.5 rounded-full inline-block"
                 style={{ background: "#22C55E" }}
               />
-              Why NexaWave
+              Why Digital Agency
             </div>
 
             <h2
               className="why-title text-5xl lg:text-6xl font-extrabold leading-tight mb-4"
-              style={{ color: "#F8FAFC" }}
+              style={{
+                color: "#F8FAFC",
+                fontFamily: "'Syne', sans-serif",
+              }}
             >
               Not Just Another{" "}
               <em
@@ -280,9 +290,8 @@ export default function HomeWhy() {
                   style={{
                     background:
                       hoveredCard === i ? "#1E293B" : "#121826",
-                    border: `1px solid ${
-                      hoveredCard === i ? "#22C55E" : "#1E293B"
-                    }`,
+                    border: `1px solid ${hoveredCard === i ? "#22C55E" : "#1E293B"
+                      }`,
                     transform:
                       hoveredCard === i
                         ? "translateY(-4px)"
@@ -313,7 +322,8 @@ export default function HomeWhy() {
           </div>
 
           {/* RIGHT */}
-          <div ref={statsRef}>
+          <div data-aos="fade-left" 
+          ref={statsRef}>
             <div
               className="stats-panel relative rounded-3xl overflow-hidden"
               style={{
@@ -349,11 +359,10 @@ export default function HomeWhy() {
                         hoveredStat === i
                           ? "#1E293B"
                           : "transparent",
-                      border: `1px solid ${
-                        hoveredStat === i
+                      border: `1px solid ${hoveredStat === i
                           ? "#22C55E33"
                           : "transparent"
-                      }`,
+                        }`,
                     }}
                     onMouseEnter={() => setHoveredStat(i)}
                     onMouseLeave={() => setHoveredStat(null)}

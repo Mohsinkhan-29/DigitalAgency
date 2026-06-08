@@ -299,9 +299,9 @@ function LaptopHero({ mounted }) {
         <div
           style={{
             width: "420px",
-            height: "10px",
+            height: "15px",
             marginLeft: "-20px",
-            background: "radial-gradient(ellipse at 50% 0%, rgba(74,222,128,0.12) 0%, transparent 70%)",
+            background: "radial-gradient(ellipse at 50% 0%, rgba(74,222,128,0.12) 0%, transparent 80%)",
             marginTop: 4,
           }}
         />
@@ -394,12 +394,14 @@ export default function PageHero() {
                   <h1
                     className="hero-fade font-black leading-[0.95] mb-5"
                     style={{
-                      fontFamily: "Syne, sans-serif",
+                      fontFamily: "'Syne', sans-serif",
                       fontSize: "clamp(2.8rem, 6vw, 5rem)",
                       animationDelay: "60ms",
+                      letterSpacing: "-0.03em",
                     }}
                   >
                     <span className="text-white">{content.staticLine1} </span>
+
                     <span
                       style={{
                         background: "linear-gradient(135deg, #4ADE80 0%, #16A34A 100%)",
@@ -410,6 +412,7 @@ export default function PageHero() {
                     >
                       {content.accentWord}
                     </span>
+
                     {content.staticLine2 && (
                       <>
                         <br />

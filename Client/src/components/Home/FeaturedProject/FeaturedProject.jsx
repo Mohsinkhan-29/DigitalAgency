@@ -47,32 +47,56 @@ const DOT_PATTERN = {
 
 export default function FeaturedProjects() {
   return (
-    <section
-      id="projects"
-      className="relative overflow-hidden bg-[#0B0F19] py-16 px-8 "
-    >
-      {/* Header */}
-      <div data-aos="fade-up" className="flex flex-wrap items-end justify-between gap-6 mb-12">
-        <div>
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-[#121826] border border-[#1E293B] rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide text-[#4ADE80] mb-5">
-            <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
-            Featured Work
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;500;600;700;800&display=swap');
+      `}</style>
+      <section
+        id="projects"
+        className="relative overflow-hidden bg-[#0B0F19] py-16 px-8 "
+      >
+        {/* Header */}
+        <div data-aos="fade-up" className="flex flex-wrap items-end justify-between gap-6 mb-12">
+          <div>
+            {/* Badge */}
+            <div className="inline-flex items-center gap-2 bg-[#121826] border border-[#1E293B] rounded-full px-4 py-1.5 text-xs font-semibold tracking-wide text-[#4ADE80] mb-5">
+              <span className="w-2 h-2 rounded-full bg-[#22C55E]" />
+              Featured Work
+            </div>
+
+            <h2
+              className="animate-fadeUp"
+              style={{
+                fontFamily: "'Syne', sans-serif",
+                color: "#F8FAFC",
+                fontSize: "clamp(2rem, 4vw, 3rem)",
+                fontWeight: 800,
+                lineHeight: 1.1,
+                animationDelay: "80ms",
+              }}
+            >
+              Projects We're{" "}
+              <em
+                style={{
+                  fontStyle: "normal",
+                  color: "#22C55E",
+                  textShadow: "0 0 40px rgba(34,197,94,0.25)",
+                }}
+              >
+                <br></br>
+                Proud Of
+              </em>
+            </h2>
+
+            <p className="text-[#94A3B8] text-[15px] leading-relaxed max-w-sm">
+              Real clients, real results — a snapshot of what we've shipped.
+            </p>
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold leading-tight text-[#F8FAFC] max-w-lg mb-3">
-            Projects We're{" "}
-            <em className="not-italic text-[#22C55E]">Proud Of</em>
-          </h2>
-
-          <p className="text-[#94A3B8] text-[15px] leading-relaxed max-w-sm">
-            Real clients, real results — a snapshot of what we've shipped.
-          </p>
-        </div>
-
-        <a
-          href="#/Project"
-          className="
+          <a
+            href="#/Project"
+            className="
             inline-flex items-center gap-2
             bg-[#121826] border border-[#1E293B]
             rounded-[14px] px-5 py-2.5
@@ -81,18 +105,20 @@ export default function FeaturedProjects() {
             hover:border-[#22C55E] hover:bg-[#1E293B] hover:text-[#4ADE80]
             self-start
           "
-        >
-          View All ↗
-        </a>
-      </div>
+          >
+            View All ↗
+          </a>
+        </div>
 
-      {/* Grid */}
-      <div data-aos="fade-up" className="grid grid-cols-1 lg:grid-cols-2 gap-5 ">
-        {PROJECTS.map((project, index) => (
-          <div
-            key={index}
-            // data-aos="fade-up"
-            className={`
+        {/* Grid */}
+        <div data-aos="fade-up" className="grid grid-cols-1 lg:grid-cols-2 gap-5 ">
+          {PROJECTS.map((project, index) => (
+            <a
+              href="#/Project">
+              <div
+                key={index}
+                // data-aos="fade-up"
+                className={`
             group flex flex-col
             bg-[#121826] border border-[#1E293B]
              rounded-3xl overflow-hidden
@@ -104,63 +130,65 @@ export default function FeaturedProjects() {
                 hover:shadow-[0_8px_40px_rgba(34,197,94,0.10)]
                ${project.tall ? "lg:row-span-2" : ""}
              `}
-          >
-            {/* Thumbnail */}
-            <div
-              className={`
+              >
+                {/* Thumbnail */}
+                <div
+                  className={`
                 relative flex items-center justify-center overflow-hidden
                 bg-gradient-to-br ${project.thumbFrom} ${project.thumbVia} ${project.thumbTo}
                 ${project.tall ? "h-[300px]" : "h-[180px]"}
               `}
-            >
-              <div
-                className="absolute inset-0 opacity-[0.08] "
-                style={DOT_PATTERN}
-              />
-              <span className="relative z-10 text-6xl leading-none transition-transform duration-300 group-hover:scale-110">
-                {project.emoji}
-              </span>
-            </div>
+                >
+                  <div
+                    className="absolute inset-0 opacity-[0.08] "
+                    style={DOT_PATTERN}
+                  />
+                  <span className="relative z-10 text-6xl leading-none transition-transform duration-300 group-hover:scale-110">
+                    {project.emoji}
+                  </span>
+                </div>
 
-            {/* Body */}
-            <div className="flex flex-col flex-1 px-6 py-5">
-              {/* Category */}
-              <p className="text-[11px] font-semibold tracking-[0.07em] uppercase text-[#4ADE80] mb-2">
-                {project.category}
-              </p>
+                {/* Body */}
+                <div className="flex flex-col flex-1 px-6 py-5">
+                  {/* Category */}
+                  <p className="text-[11px] font-semibold tracking-[0.07em] uppercase text-[#4ADE80] mb-2">
+                    {project.category}
+                  </p>
 
-              {/* Title */}
-              <h3 className="text-xl font-bold text-[#F8FAFC] mb-0">
-                {project.title}
-              </h3>
+                  {/* Title */}
+                  <h3 className="text-xl font-bold text-[#F8FAFC] mb-0">
+                    {project.title}
+                  </h3>
 
-              {/* Accent divider */}
-              <div className="w-7 h-0.5 bg-[#22C55E] rounded-full my-3" />
+                  {/* Accent divider */}
+                  <div className="w-7 h-0.5 bg-[#22C55E] rounded-full my-3" />
 
-              {/* Description */}
-              <p className="text-sm text-[#94A3B8] leading-[1.65] flex-1 mb-4">
-                {project.description}
-              </p>
+                  {/* Description */}
+                  <p className="text-sm text-[#94A3B8] leading-[1.65] flex-1 mb-4">
+                    {project.description}
+                  </p>
 
-              {/* Tags */}
-              <div className="flex flex-wrap gap-2 mt-auto">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    {project.tags.map((tag) => (
+                      <span
+                        key={tag}
+                        className="
                       bg-[#0F172A] border border-[#1E293B]
                       rounded-full px-3.5 py-1
                       text-[11px] font-semibold tracking-[0.04em] text-[#4ADE80]
                     "
-                  >
-                    {tag}
-                  </span>
-                ))}
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    </section>
+            </a>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }

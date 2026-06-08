@@ -353,7 +353,7 @@ export default function HomeAbout() {
                 }}
               >
                 A Team That{" "}
-                <em
+                <span
                   style={{
                     fontFamily: "'Syne', serif",
                     fontWeight: 800,
@@ -363,7 +363,7 @@ export default function HomeAbout() {
                   }}
                 >
                   Obsesses
-                </em>{" "}
+                </span>{" "}
                 Over Your Growth
               </h2>
 

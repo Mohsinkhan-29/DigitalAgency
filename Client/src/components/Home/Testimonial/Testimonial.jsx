@@ -91,7 +91,10 @@ export default function Testimonials() {
           Clients Love
         </p>
 
-        <h2 className="text-3xl md:text-4xl font-bold text-[#052E16] mb-4 tracking-tight">
+        <h2
+          className="text-3xl md:text-4xl font-bold text-[#052E16] mb-4 tracking-tight"
+          style={{ fontFamily: "'Syne', sans-serif" }}
+        >
           What Our Clients Say
         </h2>
 
@@ -111,10 +114,10 @@ export default function Testimonials() {
         {/* Main card */}
         <div
           className={`relative rounded-2xl overflow-hidden bg-[#4ADE80] min-h-[280px] transition-all duration-350 ${animating
-              ? direction === "next"
-                ? "opacity-0 translate-x-4"
-                : "opacity-0 -translate-x-4"
-              : "opacity-100 translate-x-0"
+            ? direction === "next"
+              ? "opacity-0 translate-x-4"
+              : "opacity-0 -translate-x-4"
+            : "opacity-100 translate-x-0"
             }`}
           style={{ transition: "opacity 0.35s ease, transform 0.35s ease" }}
         >
@@ -225,15 +228,15 @@ export default function Testimonials() {
             key={i}
             onClick={() => goTo(i, i > active ? "next" : "prev")}
             className={`rounded-full transition-all duration-300 ${i === active
-                ? "w-7 h-2.5 bg-[#16A34A]"
-                : "w-2.5 h-2.5 bg-[#BBF7D0] hover:bg-[#4ADE80]"
+              ? "w-7 h-2.5 bg-[#16A34A]"
+              : "w-2.5 h-2.5 bg-[#BBF7D0] hover:bg-[#4ADE80]"
               }`}
           />
         ))}
       </div>
 
       {/* Progress bar */}
-      <div data-aos="fade-up" className="max-w-5xl mx-auto mt-4">
+      <div  className="max-w-5xl mx-auto mt-4">
         <div className="h-0.5 bg-[#BBF7D0] rounded-full overflow-hidden">
           <div
             key={active}

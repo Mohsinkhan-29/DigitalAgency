@@ -65,7 +65,7 @@ export default function HomeNext() {
         style={{ maxWidth: 760 }}
       >
         {/* Eyebrow */}
-        <div className="flex items-center gap-3 mb-5">
+        <div data-aos="fade-up" className="flex items-center gap-3 mb-5">
           <span style={{ width: 32, height: 1, background: "#22C55E" }} />
           <span
             className="uppercase font-semibold tracking-widest"
@@ -81,10 +81,10 @@ export default function HomeNext() {
         </div>
 
         {/* Headline */}
-        <h2
+        <h2 data-aos="fade-up"
           className="font-black leading-none mb-6"
           style={{
-            fontFamily: "'Inter', sans-serif",
+            fontFamily: "'Syne', sans-serif",
             fontSize: "clamp(2.8rem, 7vw, 5.2rem)",
             color: "#F8FAFC",
             letterSpacing: "-0.03em",
@@ -98,6 +98,7 @@ export default function HomeNext() {
 
         {/* Body */}
         <p
+          data-aos="fade-up"
           className="mb-10 font-light leading-relaxed"
           style={{
             fontSize: "clamp(0.9rem, 1.5vw, 1.05rem)",
@@ -111,60 +112,65 @@ export default function HomeNext() {
         </p>
 
         {/* Buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-4">
+        <div data-aos="fade-up" className="flex flex-wrap items-center justify-center gap-4">
           {/* Primary */}
-          <button
-            className="font-bold transition-all duration-200"
-            style={{
-              background: "#22C55E",
-              color: "#0F172A",
-              borderRadius: 100,
-              padding: "16px 36px",
-              fontSize: 15,
-              fontFamily: "'Inter', sans-serif",
-              cursor: "pointer",
-              boxShadow: "0 0 28px rgba(34,197,94,0.25)",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = "#4ADE80";
-              e.currentTarget.style.transform = "translateY(-1px)";
-              e.currentTarget.style.boxShadow = "0 0 40px rgba(34,197,94,0.4)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = "#22C55E";
-              e.currentTarget.style.transform = "translateY(0)";
-              e.currentTarget.style.boxShadow = "0 0 28px rgba(34,197,94,0.25)";
-            }}
-          >
-            Start Your Project
-          </button>
+          <a
+            href="#/Contact">
+            <button
+              className="font-bold transition-all duration-200"
+              style={{
+                background: "#22C55E",
+                color: "#0F172A",
+                borderRadius: 100,
+                padding: "16px 36px",
+                fontSize: 15,
+                fontFamily: "'Inter', sans-serif",
+                cursor: "pointer",
+                boxShadow: "0 0 28px rgba(34,197,94,0.25)",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "#4ADE80";
+                e.currentTarget.style.transform = "translateY(-1px)";
+                e.currentTarget.style.boxShadow = "0 0 40px rgba(34,197,94,0.4)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "#22C55E";
+                e.currentTarget.style.transform = "translateY(0)";
+                e.currentTarget.style.boxShadow = "0 0 28px rgba(34,197,94,0.25)";
+              }}
+            >
+              Start Your Project
+            </button></a>
+
 
           {/* Secondary */}
-          <button
-            className="font-medium transition-all duration-200"
-            style={{
-              background: "transparent",
-              color: "#F8FAFC",
-              border: "1.5px solid #1E293B",
-              borderRadius: 100,
-              padding: "15px 36px",
-              fontSize: 15,
-              fontFamily: "'Inter', sans-serif",
-              cursor: "pointer",
-            }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.borderColor = "#22C55E";
-              e.currentTarget.style.background = "#121826";
-              e.currentTarget.style.transform = "translateY(-1px)";
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.borderColor = "#1E293B";
-              e.currentTarget.style.background = "transparent";
-              e.currentTarget.style.transform = "translateY(0)";
-            }}
-          >
-            Explore Services
-          </button>
+          <a
+            href="#/Services"><button
+              className="font-medium transition-all duration-200"
+              style={{
+                background: "transparent",
+                color: "#F8FAFC",
+                border: "1.5px solid #1E293B",
+                borderRadius: 100,
+                padding: "15px 36px",
+                fontSize: 15,
+                fontFamily: "'Inter', sans-serif",
+                cursor: "pointer",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "#22C55E";
+                e.currentTarget.style.background = "#121826";
+                e.currentTarget.style.transform = "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "#1E293B";
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              Explore Services
+            </button></a>
+
         </div>
       </div>
 
